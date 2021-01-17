@@ -8,9 +8,9 @@ class DataTable extends React.Component {
 
     handleDates = (array) => {
         return array.map(item => {
-          const obj = Object.assign({}, item);
-          obj["ts"] = new Date(obj["ts"]).toISOString().replace(/T/, ' ').replace(/\..+/, '');
-          return obj;
+            const obj = Object.assign({}, item);
+            obj["ts"] = new Date(obj["ts"]).toISOString().replace(/T/, ' ').replace(/\..+/, '');
+            return obj;
         });
     }
 
@@ -19,7 +19,7 @@ class DataTable extends React.Component {
         const workSheet = XLSX.utils.json_to_sheet(transformedData);
         const workBook = { Sheets: { 'data': workSheet }, SheetNames: ['data'] };
         const excelBuffer = XLSX.write(workBook, { bookType: 'xlsx', type: 'array' });
-        const data = new Blob([excelBuffer], {type: this.FILE_TYPE});
+        const data = new Blob([excelBuffer], { type: this.FILE_TYPE });
 
         ExcelSaver.saveAs(data, fileName + this.FILE_EXT);
     }
@@ -43,26 +43,28 @@ class DataTable extends React.Component {
         );
         console.log(itemsList);
         return (
-            <div className = "col-md-12">
-                <button className = "btn-primary" onClick = {() => {this.export(items, "EXPORT_" + Date.now())}}>ЭКСПОРТ В XSLX</button>
-                <table className = "table">
-                    <tr>
-                        <th>TS</th>
-                        <th>TYPE</th>
-                        <th>DATA</th>
-                        <th>ACK</th>
-                        <th>DR</th>
-                        <th>FREQ</th>
-                        <th>GATEWAY ID</th>
-                        <th>PORT</th>
-                        <th>RSSI</th>
-                        <th>SNR</th>
-                        <th>FCNT</th>
-                    </tr>
-                    <tbody>
-                        {itemsList}
-                    </tbody>
-                </table>
+            <div className="col-md-12">
+                <button className="btn-primary" onClick={() => { this.export(items, "EXPORT_" + Date.now()) }}>ЭКСПОРТ В XSLX</button>
+                <div className="table-responsive">
+                    <table className="table">
+                        <tr>
+                            <th>TS</th>
+                            <th>TYPE</th>
+                            <th>DATA</th>
+                            <th>ACK</th>
+                            <th>DR</th>
+                            <th>FREQ</th>
+                            <th>GATEWAY ID</th>
+                            <th>PORT</th>
+                            <th>RSSI</th>
+                            <th>SNR</th>
+                            <th>FCNT</th>
+                        </tr>
+                        <tbody>
+                            {itemsList}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }
