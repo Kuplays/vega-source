@@ -12,10 +12,6 @@ class CustomMarker extends React.Component {
     }
 
     componentDidUpdate = (prevProps, prevState) => {
-        //console.log("PREV STATE: " + prevState.doorState);
-        //console.log("PREV PROPS: " + prevProps.doorState);
-        //console.log("NEW PROPS: " + this.props.doorState);
-
         if (prevProps.doorState !== this.props.doorState)
             this.setState({doorState: this.props.doorState});
     }
